@@ -1,0 +1,47 @@
+<div id="modal-report-filter" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="report-filter-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.filterCondition}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.containIP}}</label>
+                        <div class="col-md-7 "><textarea rows="4" class="form-control" name="containIP" ng-model="filterObj.containIP" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.unContainIP}}</label>
+                        <div class="col-md-7 "><textarea rows="4" class="form-control" name="unContainIP" ng-model="filterObj.unContainIP" /></div>
+                    </div>
+                    <div ng-if="gReportType=='result-leak'">
+                        <div class="form-group">
+                            <label class="col-md-5">{{msg.leakName}}</label>
+                            <div class="col-md-7 "><input class="form-control" name="name" ng-model="filterObj.name"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5">CVE{{msg.number}}</label>
+                            <div class="col-md-7 "><input class="form-control" name="cve" ng-model="filterObj.cve"/></div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="gReportType=='overview-host' || gReportType=='overview-leak' || gReportType=='result-leak'">
+                        <label class="col-md-5">{{msg.leakSafeLevel}}</label>
+                        <div class="col-md-7 " name="threats">
+                            <input type="checkbox" name="threats.high" ng-model="filterObj.threats.high" ng-checked="filterObj.threats.high=='1'"  ng-true-value='1' ng-false-value='0'>&nbsp{{msg.threatArray['High']}}
+                            <input type="checkbox" name="threats.medium" ng-model="filterObj.threats.medium" ng-checked="filterObj.threats.medium=='1'"  ng-true-value='1'  ng-false-value='0'>&nbsp{{msg.threatArray['Medium']}}
+                            <input type="checkbox" name="threats.low" ng-model="filterObj.threats.low" ng-checked="filterObj.threats.low=='1'"  ng-true-value='1'  ng-false-value='0'>&nbsp{{msg.threatArray['Low']}}
+                            <input type="checkbox" name="threats.record" ng-model="filterObj.threats.record" ng-checked="filterObj.threats.record=='1'"  ng-true-value='1'  ng-false-value='0'>&nbsp{{msg.threatArray['Record']}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success pull-left" ng-click="restoreFilter()">{{msg.restoreBtn}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="confirmFilter()">{{msg.confirmBtn}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="cancelFilter()">{{msg.cancelBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,75 @@
+<div id="modal-edit-portList" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="portlist-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" custom-modal-status="new">{{msg.editPortList}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" name="name" ng-model="formData.name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="comment" ng-model="formData.comment"></div>
+                    </div>
+                    <hr>
+                    <div id="create-port-range">
+                        <label class="h4"><strong>{{msg.portRange}}</strong></label>
+                        <div class="form-group">
+                            <label class="col-md-5">{{msg.begin}}</label>
+                            <div class="col-md-7 "><input class="form-control validate[required, min[1], max[65535], custom[integer]]" name="start" ng-model="formPortRangeData.start"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5">{{msg.end}}</label>
+                            <div class="col-md-7 "><input class="form-control validate[required, min[1], max[65535], custom[integer]]" name="end" ng-model="formPortRangeData.end"></div>
+                        </div>
+                        <div class="form-group" ng-init="formPortRangeData.type = 'tcp'">
+                            <label class="col-md-5">{{msg.protocol}}</label>
+                            <div class="col-md-2"><input  type="radio" ng-model="formPortRangeData.type" value="tcp">TCP</div>
+                            <div class="col-md-2"><input  type="radio" ng-model="formPortRangeData.type"  value="udp">UDP</div>
+                            <button class="col-md-2 btn btn-default" ng-click="createPortRange(formData.id)">{{msg.add}}</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div style="height:200px; overflow-y:auto">
+                        <label class="h4"><strong>{{msg.portRangeList}}</strong></label>
+                        <div>
+                            <label class="col-md-5">ID</label>
+                            <div class="col-md-7 "><p>{{curPortlist.id}}</p></div>
+                        </div>
+                        <div>
+                            <label class="col-md-5">{{msg.createTime}}</label>
+                            <div class="col-md-7 "><p id="target-create-time">{{curPortlist.creation_time}}</p></div>
+                        </div>
+                        <div>
+                            <label class="col-md-5">{{msg.lastModifyTime}}</label>
+                            <div class="col-md-7 "><p id="target-modify-time">{{modification_time}}</p></div>
+                        </div>
+                        <table class="table table-hover table-striped ">
+                            <thead>
+                            <tr><th>{{msg.begin}}</th><th>{{msg.end}}</th><th>{{msg.protocol}}</th><th>{{msg.operate}}</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat = "port in curPortlist.port_range">
+                                <td>{{port.start}}</td>
+                                <td>{{port.end}}</td>
+                                <td>{{port.type}}</td>
+                                <td>
+                                    <a href="#" class="glyphicon glyphicon-remove" ng-click="deletePortRange(port.port_range_id, $index)"></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="clickModalOk('edit',formData.id)">{{msg.saveBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

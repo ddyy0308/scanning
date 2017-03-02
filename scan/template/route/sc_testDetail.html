@@ -1,0 +1,68 @@
+<section>
+    <div class="panel-info col-md-12 page-content b-mt20">
+        <div class="panel-heading custom-panel-heading b-dpNone">
+            <ul class="nav  nav-pills" role="tablist">
+                <li id="summary" class="active">
+                    <a href="javascript:void(0);">扫描配置测试用例详情<span class="badge pull-right" title="总计">1</span></a>
+                </li>
+            </ul>
+        </div><!--panel-heading -->
+
+        <div class="panel-body b-p0">
+            <div class="container-fluid">
+                <div class="row">
+                    <table class="col-md-8">
+                        <tbody class="row">
+                        <tr><th class="col-md-2">{{msg.name}}:&nbsp</th><th class="col-md-10">{{testDetail.name}}</th></tr>
+                        <tr ng-if="false"><th class="col-md-2">{{msg.config}}:&nbsp</th><th class="col-md-10">{{testDetail.config_name}}</th></tr>
+                        <tr><th class="col-md-2">{{msg.leakType}}:&nbsp</th><th class="col-md-10">{{testDetail.family_name}}</th></tr>
+                        </tbody>
+                    </table>
+                    <table class="col-md-4">
+                        <tbody>
+                        <tr><th>OID:&nbsp</th><th>{{testDetail.oid}}</th></tr>
+                        <tr><th>{{msg.createTime}}:&nbsp</th><th>{{testDetail.creation_time}}</th></tr>
+                        <tr><th>{{msg.lastModifyTime}}:&nbsp</th><th>{{testDetail.modification_time}}</th></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div>
+                        <h3><b>{{msg.leakNum}}</b></h3>
+                        <p>CVE编号:&nbsp{{testDetail.cve_id}}</p>
+                        <p>CNVD编号:&nbsp{{testDetail.cnvd_id}}</p>
+                        <p>CNNVD编号:&nbsp{{testDetail.extraData.cnnvd_id}}</p>
+                        <p>BID编号:&nbsp{{testDetail.bugtraq_id}}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h3><b>{{msg.leakDescription}}</b></h3>
+                        <p>{{testDetail.extraData.summary}}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h3><b>{{msg.influenceSoftware}}/{{msg.os}}</b></h3>
+                        <p>{{testDetail.extraData.affected}}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h3><b>{{msg.leakGrade}}</b></h3>
+                        <p>{{msg.threatGrade}}:&nbsp{{testDetail.cvss_base}}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h3><b>{{msg.solution}}</b></h3>
+                        <p>{{testDetail.extraData.solution}}</p>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h3><b>{{msg.referenceLink}}</b></h3>
+                        <p>{{testDetail.xrefs}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--panel-body -->
+    </div><!--panel-info-->
+</section>

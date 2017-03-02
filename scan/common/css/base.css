@@ -1,0 +1,219 @@
+/*!
+ * 定义页面基本样式属性
+ */
+
+.b-dpNone {
+    display: none !important;
+}
+.b-dpBlock {
+    display: block !important;
+}
+
+/* 背景色 */
+.b-bgNone {
+    background-color: rgba(0,0,0,0) !important;
+}
+
+.b-bgWhite {
+    background-color: white !important;
+}
+
+
+.b-bgGray {
+    /*background-color: gray !important;*/
+    background-color: rgba(56, 200, 135, .5);
+}
+
+.b-bgThinGray {
+    background-color: rgba(245, 245, 245, .5) !important;
+}
+
+.b-bgBlack {
+    background-color: black !important;
+}
+
+.b-bgRed {
+    background-color: rgba(255, 0, 0, .5);
+}
+
+.b-bgYellow {
+    background-color: rgba(255, 225, 0, .7);
+}
+
+.b-bgBlue{
+    background-color: rgba(11, 52, 184, .5);
+}
+
+.b-bgF5 {
+    background-color: #F5F5F5 !important;
+}
+
+/* 字体大小 */
+.b-fs18 {
+    font-size: 18px !important;
+}
+
+.b-flg {
+    font-size: large !important;
+}
+
+/* 字体颜色 */
+.b-cWhite {
+    color:white !important;
+}
+
+/* 字体加粗 */
+.b-fwBold {
+    font-weight: bold;
+}
+/* 内外边距 */
+.b-p0 {
+    padding: 0 !important;
+}
+
+.b-pr0{
+    padding-right: 0 !important;
+}
+
+.b-pl0 {
+    padding-left: 0 !important;
+}
+
+.b-pr50{
+    padding-right: 50px !important;
+}
+
+.b-plr20{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.b-ptb5 {
+    padding: 5px 0;
+}
+
+/* 外边距 */
+.b-m0 {
+    margin: 0 !important;
+}
+
+.b-mt10 {
+    margin-top: 10px !important;
+}
+
+.b-mt20 {
+    margin-top: 20px !important;
+}
+
+.b-ml10 {
+    margin-left: 10px !important;
+}
+
+.b-ml15 {
+    margin-left: 15px !important;
+}
+
+.b-ml40 {
+    margin-left: 40px !important;
+}
+
+.b-ml60 {
+    margin-left: 60px !important;
+}
+
+.b-mr10 {
+    margin-right: 10px !important;
+}
+
+.b-mr100 {
+    margin-right: 100px !important;
+}
+
+.b-mb0 {
+    margin-bottom: 0 !important;
+}
+
+/* min-height */
+.b-min-height {
+    min-height: 755px !important;
+    background-color: rgb(255, 255, 255) !important;
+    padding: 15px;
+}
+
+/* border边框 */
+.b-bb1 {
+    border-bottom: 1px solid #E1DEDE !important;
+}
+
+/* width */
+.b-w100-p {
+    width: 100% !important;
+}
+
+.b-w50-px {
+    width: 50px !important;
+}
+
+.b-w80-px {
+    width: 80px !important;
+}
+
+.b-w100-px {
+    width: 100px !important;
+}
+
+.b-w120-px{
+    width:120px !important;
+}
+
+.b-w160-px {
+    width: 160px !important;
+}
+
+.b-w250-px {
+    width: 250px !important;
+}
+
+
+.b-w260-px {
+    width: 260px !important;
+}
+
+.b-w400-px {
+    width: 400px !important;
+}
+
+/* height */
+.b-h100-p {
+    height: 100% !important;
+}
+
+/* text align */
+.b-taR {
+    text-align: right !important;
+}
+
+.b-taL {
+    text-align: left !important;
+}
+
+.b-taC {
+    text-align: center !important;
+}
+
+/* border */
+.b-br-dash {
+    border-right: 1px dashed;
+}
+
+/* table */
+.b-table-fixed {
+    table-layout: fixed;
+}
+
+/* cut long string and show ellipsis */
+.b-text-cut {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}

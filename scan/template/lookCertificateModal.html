@@ -1,0 +1,57 @@
+<div id="modal-look-certificate" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="certificate-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.lookCertificate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" name="name" ng-value="certificate.name" readonly></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="comment" ng-value="certificate.comment" readonly></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.loginName}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" name="login" ng-value="certificate.login" readonly></div>
+                    </div>
+                    <div id="modal-cert-extend">
+                        <div id="certificate-detail" style="display:block; height:300px; overflow-y:auto;" role="expand">
+                            <hr align="center" width="100%" />
+                            <div>
+                                <label class="col-md-5">ID</label>
+                                <div class="col-md-7 "><p>{{certificate.id}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.createTime}}</label>
+                                <div class="col-md-7 "><p>{{certificate.creation_time}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.lastModifyTime}}</label>
+                                <div class="col-md-7 "><p>{{certificate.modification_time}}</p></div>
+                            </div>
+                            <hr align="center" width="100%" />
+                            <table class="table table-hover table-striped ">
+                                <thead>
+                                <tr><th>{{msg.useCFTarget}}</th><th>{{msg.search}}</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="target in certificate.target">
+                                        <td>{{target.target_name}}</td><td><a href="#" ng-click="lookTargetModal(target.target_id)" class="glyphicon glyphicon-search" ></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--target-detail-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalClose('#modal-look-certificate')">{{msg.closeBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

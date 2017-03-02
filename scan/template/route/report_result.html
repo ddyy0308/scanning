@@ -1,0 +1,179 @@
+<section>
+    <div ng-controller="modalCtrl">
+        <ul class="nav nav-tabs" id="myTab">
+            <li><a href="#tab-leakResult" data-toggle="tab">{{msg.leak}}</a></li>
+            <li><a href="#tab-hostResult" data-toggle="tab">{{msg.host}}</a></li>
+            <li><a href="#tab-userResult" data-toggle="tab">{{msg.user}}</a></li>
+            <li><a href="#tab-portServiceResult" data-toggle="tab">{{msg.portService}}</a></li>
+            <li class="pull-right">
+                <div class="btn-group">
+                    <a href="#taskReport" class="btn btn-success"><i class="fa fa-reply fa-fw"></i>&nbsp{{msg.return}}</a>
+                    <a href="javascript:void(0)" class="btn btn-success" ng-click="forwardReportOverview();"><i class="fa fa-eye fa-fw"></i>&nbsp{{msg.reportOverview}}</a>
+                    <a href="javascript:void(0)" ng-if="gReportType!='overview-task'" class="btn btn-success" ng-click="editRFModal('result');">
+                        <i class="fa fa-fw" ng-class="{false:'fa-check-square-o', true:'fa-square-o'}[gFilterParam == undefined]"></i>&nbsp{{msg.filter}}
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade in" id="tab-leakResult" >
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills" role="tabist">
+                            <li id="summary" class="active b-pr50">
+                                <a>{{msg.leak}}<span class="badge pull-right">{{leakList.total}}</span></a>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped b-table-fixed">
+                            <thead>
+                            <tr>
+                                <th class="b-w120-px">{{msg.host}}</th>
+                                <th class="b-w80-px">{{msg.leak}} ID</th>
+                                <th class="b-w400-px">{{msg.leakName}}</th>
+                                <th class="b-w100-px">{{msg.threatLevel}}</th>
+                                <th class="b-w120-px">{{msg.position}}</th>
+                                <th class="b-w160-px">CVE{{msg.number}}</th>
+                                <th>{{msg.returnInfo}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="leak in leakList.lists">
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{leak.host}}</td>
+                                <td>{{leak.oid}}</td>
+                                <td class="b-taL b-text-cut" data-toggle="tooltip-" title={{leak.name}}><a href="javascript:void(0)" ng-click="lookLeakModal($index);">{{leak.name}}</a></td>
+                                <td>{{msg.threatArray[leak.threat]}}</td>
+                                <td>{{leak.port}}</td>
+                                <td class="b-taL b-text-cut" data-toggle="tooltip-" title={{leak.cve}}>{{leak.cve}}</td>
+                                <td class="b-taL b-text-cut" data-toggle="tooltip-" title={{leak.description}}>{{leak.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+                <div class="modal-wrapper">
+                    <div ng-include="'/template/lookLeakModal.html'"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-hostResult">
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills" role="tabist">
+                            <li class="active b-pr50">
+                                <a>{{msg.host}}<span class="badge pull-right">{{hostList.total}}</span></a>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.host}}</th>
+                                <th>{{msg.workGroup}}</th>
+                                <th>{{msg.os}}</th>
+                                <th>{{msg.macAddress}}</th>
+                                <th>NetBios{{msg.name}}</th>
+                                <th>NetBios{{msg.domain}}</th>
+                                <th>{{msg.operate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="host in hostList.lists">
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{host.ip}}</td>
+                                <td>{{host.group}}</td>
+                                <td>{{host.os}}</td>
+                                <td>{{host.mac}}</td>
+                                <td>{{host.netBiosName}}</td>
+                                <td>{{host.netBiosValue}}</td>
+                                <td class="action">
+                                    <div>
+                                        <a href="javascript:void(0)" class="glyphicon glyphicon-edit" ng-click="editHostModal(host.id)" data-toggle="tooltip" title={{msg.editHostInfo}}></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+                <div class="modal-wrapper">
+                    <div ng-include="'/template/editHostModal.html'"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-userResult">
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills" role="tabist">
+                            <li class="active b-pr50">
+                                <a>{{msg.user}}<span class="badge pull-right">{{userList.total}}</span></a>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.host}}</th>
+                                <th>{{msg.workGroup}}</th>
+                                <th>{{msg.type}}</th>
+                                <th>{{msg.user}}</th>
+                                <th>{{msg.password}}</th>
+                                <th>{{msg.description}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="user in userList.lists">
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{user.ip}}</td>
+                                <td>{{user.group}}</td>
+                                <td>{{user.type}}</td>
+                                <td>{{user.user}}</td>
+                                <td>{{user.pass}}</td>
+                                <td>{{user.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+            </div>
+            <div class="tab-pane fade" id="tab-portServiceResult">
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills" role="tabist">
+                            <li class="active b-pr50">
+                                <a>{{msg.portService}}<span class="badge pull-right">{{portList.total}}</span></a>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.host}}</th>
+                                <th>{{msg.workGroup}}</th>
+                                <th>{{msg.port}}</th>
+                                <th>{{msg.protocol}}</th>
+                                <th>{{msg.name}}</th>
+                                <th>{{msg.description}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="port in portList.lists">
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{port.ip}}</td>
+                                <td>{{port.group}}</td>
+                                <td>{{port.port}}</td>
+                                <td>{{port.type}}</td>
+                                <td>{{port.name}}</td>
+                                <td>{{port.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+            </div>
+            <div ng-include="'/template/pagination.html'"></div>
+            <div class="modal-wrapper">
+                <div ng-include="'/template/reportFilterModal.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

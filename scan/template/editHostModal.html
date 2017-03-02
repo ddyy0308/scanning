@@ -1,0 +1,25 @@
+<div id="modal-edit-host" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="host-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.editHostInfo}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.os}}{{msg.name}}</label>
+                        <div class="col-md-7 ">
+                            <select name="os" class="form-control">
+                                <option ng-repeat="os in osList" value="os.name" ng-selected="os.name == host.os">{{os.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalOk('edit', host.id)">{{msg.saveBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

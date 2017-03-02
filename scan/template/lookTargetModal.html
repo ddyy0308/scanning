@@ -1,0 +1,103 @@
+<div id="modal-look-target" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="target-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.lookTarget}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]"  name="name" ng-model="formDataEdit.name" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="comment" ng-model="formDataEdit.comment" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.host}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" name="hosts" ng-model="formDataEdit.hosts" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.excludeHost}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="exclude_hosts" ng-model="formDataEdit.exclude_hosts" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.onlyReverseSearch}}</label>
+                        <div class="col-md-7">是&nbsp&nbsp<input  type="checkbox" name="reverse_lookup_only" ng-checked="formDataEdit.reverse_lookup_only == 1" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.allReverseSearch}}</label>
+                        <div class="col-md-7">是&nbsp&nbsp<input  type="checkbox" name="reverse_lookup_unify" ng-checked="formDataEdit.reverse_lookup_unify == 1" disabled="disabled"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.portList}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control"name="port_list" disabled="disabled">
+                                <option value="{{formDataEdit.port_list}}">{{formDataEdit.port_list_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.smbCertificate}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="smb_lsc_credential" disabled="disabled">
+                                <option value="" selected='selected' ng-if="formDataEdit.smb_lsc_credential_name == ''">--</option>
+                                <option value="{{formDataEdit.smb_lsc_credential}}" selected='selected' ng-if="formDataEdit.smb_lsc_credential_name != ''">{{formDataEdit.smb_lsc_credential_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.sshCertificate}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="ssh_lsc_credential" disabled="disabled">
+                                <option value="" selected='selected' ng-if="formDataEdit.ssh_lsc_credential_name == ''">--</option>
+                                <option value="{{formDataEdit.ssh_lsc_credential}}" selected="selected" ng-if="formDataEdit.ssh_lsc_credential_name != ''">{{formDataEdit.ssh_lsc_credential_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.aliveTest}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="alive_tests" disabled="disabled">
+                                <option value="{{formDataEdit.alive_tests}}" selected="selected">{{formDataEdit.alive_tests}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="modal-target-extend">
+                        <hr>
+                        <div id="target-detail" role="expand" style="height:200px; overflow-y:auto">
+                            <div>
+                                <label class="col-md-5">ID</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.id}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.createTime}}</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.creation_time}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.lastModifyTime}}</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.modification_time}}</p></div>
+                            </div>
+                            <table class="table table-hover table-striped ">
+                                <thead>
+                                <tr><th>{{msg.useTargetTask}}</th><th>{{msg.search}}</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="task in formDataEdit.task">
+                                        <td>{{task.task_name}}</td><td><a href="#" ng-click="lookTaskModal(task.task_id)" data-toggle="tootip" title={{msg.lookTaskDetail}} class="glyphicon glyphicon-search"></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--target-detail-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalClose('#modal-look-target')">{{msg.closeBtn}}</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div>
+
+</div><!-- /.modal-dialog -->

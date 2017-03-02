@@ -1,0 +1,68 @@
+<section>
+    <div class="panel-info col-md-12 page-content b-mt20">
+        <div class="panel-heading custom-panel-heading b-dpNone">
+            <ul class="nav nav-pills">
+                <li class="active  b-pr50">
+                    <a href="#">{{msg.scanConfigDetail}}<span class="badge pull-right">{{configDetail.families.length}}</span></a>
+                </li>
+            </ul>
+        </div><!--panel-heading -->
+        <div class="panel-body b-p0" >
+            <div class="container-fluid">
+                <div class="row">
+                    <table class="col-md-6">
+                        <tbody class="row">
+                        <tr><th class="col-md-2">{{msg.name}}:</th><th class="col-md-10">{{configDetail.name}}</th></tr>
+                        <tr><th class="col-md-2">{{msg.comment}}:</th><th class="col-md-10">{{configDetail.comment}}</th></tr>
+                        </tbody>
+                    </table>
+                    <table class="col-md-offset-2 col-md-4">
+                        <tbody>
+                        <tr ><th>ID:</th><th>{{configDetail.id}}</th></tr>
+                        <tr ><th>{{msg.createTime}}:</th><th>{{configDetail.creation_time}}</th></tr>
+                        <tr><th>{{msg.lastModifyTime}}:</th><th>{{configDetail.modification_time}}</th></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h3><strong>{{msg.leakType}}</strong></h3>
+                <table class="table table-hover table-striped  table-bordered container-fluid">
+                    <thead>
+                        <tr class="row">
+                            <th class="col-md-4">{{msg.leakType}}</th>
+                            <th class="col-md-4">{{msg.testCaseSelect}}</th>
+                            <th class="col-md-2">{{msg.trend}}</th>
+                            <th class="col-md-2">{{msg.operate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="row" ng-repeat = "family in configDetail.families | orderBy:'family_name'">
+                        <td class="col-md-4">{{family.family_name}}</td>
+                        <td class="col-md-4">{{family.nvt_count}}/{{family.max_nvt_count}}</td>
+                        <td  class="col-md-2 glyphicon" ng-class="{true:'glyphicon-arrow-right', false:'glyphicon-arrow-up'}[family.growing == 0]"></td>
+                        <td class="col-md-2"><a href="#/leak/{{configDetail.id}}/{{family.family_name}}" class="glyphicon glyphicon-search" data-toggle="tooltip" title={{msg.lookSCLeakDetail}}></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h3><strong>{{msg.scanParam}}</strong></h3>
+                <table class="table table-hover table-striped  table-bordered container-fluid">
+                    <thead>
+                        <tr class="row">
+                            <th class="col-md-4">{{msg.name}}</th>
+                            <th class="col-md-8">{{msg.selectValue}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row" ng-repeat="preference in configDetail.preferences | orderBy:'preference_name'">
+                            <td class="col-md-4">{{preference.preference_name}}</td>
+                            <td class="col-md-8">{{preference.preference_value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!--panel-body -->
+    </div><!--panel-info-->
+</section>

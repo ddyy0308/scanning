@@ -1,0 +1,112 @@
+<div id="modal-look-task" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="task-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.lookTask}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input id="task-name" class="form-control validate[required]"  name="name" ng-value="formDataEdit.name" ng-disabled="true"></div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input id="task-comment" class="form-control" name="comment" ng-value="formDataEdit.comment" ng-disabled="true"></div>
+                    </div>
+                    <div class="form-group " ng-if="taskMenuType == 'custom'">
+                        <label class="col-md-5">{{msg.scanStrategy}}</label>
+                        <div class="col-md-7 ">
+                            <select id="scan-config" class="form-control" name="config_id" ng-disabled="true">
+                                <option>{{formDataEdit.config_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.scanTarget}}</label>
+                        <div class="col-md-7">
+                            <select id="scan-target" class="form-control validate[required]" name="target_id" ng-disabled="true">
+                                <option ng-selected="true">{{formDataEdit.target_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.scanOrder}}</label>
+                        <div class="col-md-7 ">
+                            <select id="hosts-ordering" class="form-control" name="hosts_ordering" ng-disabled="true">
+                                <option ng-selected="true">{{msg.hostOrder[formDataEdit.hosts_ordering]}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.sourceInterface}}</label>
+                        <div class="col-md-7 "><input id="source-iface" class="form-control " name="source_iface" placeholder="--" ng-value="formDataEdit.source_iface" ng-disabled="true"></div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.addResultInAsset}}</label>
+                        <div id="in-assets" class="col-md-7">是&nbsp&nbsp<input type="checkbox" name="in_assets" ng-checked="formDataEdit.in_assets == 'yes'" ng-disabled="true"></div>
+                    </div>
+                    <div class="plan-wrapper">
+                        <hr align="center"/>
+                        <p class="b-fs18"><strong>{{msg.plan}}</strong></p>
+                        <div class="form-group  b-mb0">
+                            <label class="col-md-5">{{msg.planName}}</label>
+                            <div class="col-md-7">
+                                <p>{{formDataEdit.plan_name}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group b-mb0">
+                            <label class="col-md-5">{{msg.nextRun}}</label>
+                            <div class="col-md-7 ">
+                                <p>{{formDataEdit.next_time}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr align="center"/>
+                    <p class="b-fs18"><strong>{{msg.scanStrength}}</strong></p>
+
+                    <div class="form-group b-mb0">
+                        <label class="col-md-5">{{msg.executeTestCaseNumber}}</label>
+                        <div class="col-md-7 "><p>{{formDataEdit.max_checks}}</p></div>
+                    </div>
+                    <div class="form-group b-mb0">
+                        <label class="col-md-5">{{msg.scanHostNumber}}</label>
+                        <div class="col-md-7 "><p>{{formDataEdit.max_hosts}}</p></div>
+                    </div>
+                    <hr>
+                    <div id="task-expand" class="expand" style="height: 150px; overflow-y: auto;" role="expand">
+                        <div>
+                            <label class="col-md-5">ID</label>
+                            <div class="col-md-7 "><p>{{formDataEdit.id}}</p></div>
+                        </div>
+                        <div>
+                            <label class="col-md-5">{{msg.createTime}}</label>
+                            <div class="col-md-7 "><p>{{formDataEdit.creation_time}}</p></div>
+                        </div>
+                        <div>
+                            <label class="col-md-5">{{msg.lastModifyTime}}</label>
+                            <div class="col-md-7 "><p>{{formDataEdit.modification_time}}</p></div>
+                        </div>
+                        <hr>
+                        <table class="table table-hover table-striped ">
+                            <thead>
+                            <tr><th>{{msg.targetUsageByTask}}</th><th>{{msg.search}}</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{formDataEdit.target_name}}</td>
+                                    <td><a href="#" ng-click="lookTargetModal(formDataEdit.target_id)" class="glyphicon glyphicon-search" data-toggle="tooltip" title="{{msg.lookTargetDetail}}"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalClose('#modal-look-task')">{{msg.closeBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

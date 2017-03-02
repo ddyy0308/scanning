@@ -1,0 +1,86 @@
+<div id="modal-look-plan" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.lookPlan}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control" name="name" ng-value="formDataEdit.name" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="comment" ng-value="formDataEdit.comment" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.firstRun}}</label>
+                        <div class="col-md-7 "><input class="form-control" type="datetime-local"
+                                                      name="first_time" ng-value="formDataEdit.first_time" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.nextRun}}</label>
+                        <div class="col-md-7 "><input class="form-control " type="datetime-local"
+                                                      name="next_time" ng-value="formDataEdit.next_time" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.runInterval}}</label>
+                        <div class="col-md-4 b-pr0"><input class="form-control" name="period" ng-value="formDataEdit.period" disabled></div>
+                        <div class="col-md-2 b-p0" >
+                            <select class="form-control" name="unit_period" ng-value="formDataEdit.unit_period" disabled>
+                                <option value="hour" selected>小时</option>
+                                <option value="day">天</option>
+                                <option value="week">周</option>
+                                <option value="month">月</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.maintainTime}}</label>
+                        <div class="col-md-4 b-pr0"><input class="form-control" name="duration" ng-value="formDataEdit.duration" disabled></div>
+                        <div class="col-md-2 b-p0">
+                            <select class="form-control" name="unit_duration" ng-value="formDataEdit.unit_duration" disabled>
+                                <option value="hour" selected>小时</option>
+                                <option value="day">天</option>
+                                <option value="week">周</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="modal-plan-extend">
+                        <div style="height:300px; overflow-y:auto;" role="expand">
+                            <hr/>
+                            <div>
+                                <label class="col-md-5">ID</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.id}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.createTime}}</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.creation_time}}</p></div>
+                            </div>
+                            <div>
+                                <label class="col-md-5">{{msg.lastModifyTime}}</label>
+                                <div class="col-md-7 "><p>{{formDataEdit.lastModifyTime}}</p></div>
+                            </div>
+                            <hr/>
+                            <table class="table table-hover table-striped ">
+                                <thead>
+                                <tr><th>{{msg.usePlanTask}}</th><th>{{msg.search}}</th></tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="task in formDataEdit.task">
+                                    <td>{{task.task_name}}</td><td><a href="#" ng-click="lookTaskModal(task.task_id)" class="glyphicon glyphicon-search" ></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div><!--target-detail-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalClose('#modal-look-plan')">{{msg.confirmBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

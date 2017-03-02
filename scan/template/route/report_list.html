@@ -1,0 +1,65 @@
+<section>
+    <div ng-controller="modalCtrl">
+        <div class="panel-info col-md-12 page-content">
+            <div class="panel-heading custom-panel-heading">
+                <ul class="nav  nav-pills" role="tablist">
+                    <li class="active b-pr50">
+                        <a>{{msg.taskReport}}<span class="badge pull-right" title={{msg.taskReportNum}}>{{taskReportList.total}}</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body b-p0">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">{{msg.taskName}}</th>
+                        <th rowspan="2">{{msg.scanStatus}}</th>
+                        <th rowspan="2">{{msg.startScanTime}}</th>
+                        <th colspan="4">{{msg.scanResult}}</th>
+                        <th rowspan="2">{{msg.operate}}</th>
+                    </tr>
+                    <tr>
+                        <th class="b-bgRed">{{msg.highThreat}}</th>
+                        <th class="b-bgYellow">{{msg.mediumThreat}}</th>
+                        <th class="b-bgBlue">{{msg.lowThreat}}</th>
+                        <th class="b-bgGray">{{msg.record}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in taskReportList.lists">
+                        <td>
+                            <span><a href="javascript:void(0)" ng-click="lookTaskOverviewModal(list.report_id)" data-toggle="tooltip" title={{msg.lookLeakDetail}}>{{list.task_name}}</a></span>
+                            <span ng-if="list.comment">&nbsp&nbsp({{list.task_comment}})</span>
+                        </td>
+                        <td style="width:220px;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-info progress-bar-striped"
+                                     ng-class="{true:'active',false:''}[list.scan_run_status == 'Running']" ng-style={'width':"{{list.task_progress}}%"}></div>
+                                <div class="table-progress-status" style="position: absolute;padding-left: 50px;">
+                                    <span>{{list.task_progress}}%</span>&nbsp&nbsp<span>({{msg.status[list.scan_run_status]}})</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{list.scan_start_time}}</td>
+                        <td>{{list.high}}</td>
+                        <td>{{list.medium}}</td>
+                        <td>{{list.low}}</td>
+                        <td>{{list.record}}</td>
+                        <td class="action">
+                            <div>
+                                <a href="javascript:void(0)" ng-click=forwardReportResult(list.report_id); class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title={{msg.lookTaskReportResult}}></a>
+                                <a href="javascript:void(0)" ng-if="list.scan_run_status != 'Running'" class="glyphicon glyphicon-remove" ng-click="deleteTaskReport(list.report_id)" data-toggle="tooltip" title={{msg.deleteTaskReport}}></a>
+                                <a href="javascript:void(0)" ng-if="list.scan_run_status == 'Running'" class="glyphicon glyphicon-remove custom-disabled"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-include="'/template/pagination.html'"></div>
+        <div class="modal-wrapper">
+            <div ng-include="'/template/lookTaskOverviewModal.html'"></div>
+        </div>
+    </div>
+</section>

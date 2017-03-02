@@ -1,0 +1,121 @@
+<div id="modal-edit-scanConfig-leakType" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="scanConfig-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.editScanConfig}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" id="config_name" ng-value="leakType.name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" id="config_comment" ng-value="leakType.comment"></div>
+                    </div>
+                    <hr>
+                    <div id="modal-table-leak-wrapper" style="height:500px; overflow-y:auto">
+                        <div id="modal-table-leakType">
+                            <h4><strong>{{msg.leakType}}</strong></h4>
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                <tr class='row'>
+                                    <th class='col-md-3'>{{msg.leakType}}</th>
+                                    <th class='col-md-3'>{{msg.testCaseSelect}}</th>
+                                    <th class='col-md-2'>{{msg.trend}}</th>
+                                    <th class='col-md-2'>{{msg.select}}</th>
+                                    <th class='col-md-2'>{{msg.operate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class='row' ng-repeat="family in leakType.families">
+                                    <td class='col-md-3 name'>{{family.family_name}}</td>
+                                    <td class='col-md-3'>{{family.nvt_count}}/{{family.max_nvt_count}}</td>
+                                    <td class="trend col-md-2"><a class='glyphicon' ng-class="{true:'glyphicon-arrow-right', false:'glyphicon-arrow-up'}[family.family_growing == 0]"></a></td>
+                                    <td class="trend col-md-2"><input type='checkbox' name="{{family.family_name}}" ng-checked="family.fullselect == 1"></td>
+                                    <td><a href="javascript:void(0)" class="glyphicon glyphicon-edit"
+                                        ng-click="editSCLeakTestModal(leakType.id, leakType.name, family.family_name);">
+                                         </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="modal-table-scanParam">
+                            <h4><strong>{{msg.scanParam}}</strong></h4>
+                            <table class="table table-hover table-striped  table-bordered">
+                                <thead>
+                                <tr class="row">
+                                    <th class="col-md-5">{{msg.name}}</th>
+                                    <th class="col-md-7">{{msg.selectValue}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="row" ng-repeat="preference in leakType.preferences">
+                                    <td class="col-md-5 name">{{preference.preference_name}}</td>
+                                    <td class="col-md-7" ng-if="preference.preference_value == 'yes'"><input type='checkbox' name='preference'  checked='checked'></td>
+                                    <td class="col-md-7" ng-if="preference.preference_value == 'no'"><input type='checkbox' name='preference'></td>
+                                    <td class="col-md-7">
+                                        <input type='text' name="{{preference.preference_name}}"
+                                               ng-if="preference.preference_value != 'yes' && preference.preference_value != 'no'" ng-value="preference.preference_value"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="clickModalOk('editLeakType',leakType.id)">{{msg.saveBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->
+<div id="modal-edit-scanConfig-leakTest" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.editLeakType}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.configName}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" ng-value="leakTest.configname" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.leakType}}</label>
+                        <div class="col-md-7 "><input id="scanConfig-leakType"  class="form-control" ng-value="leakTest.nvt_families" disabled></div>
+                    </div>
+                    <hr>
+                    <div id="modal-table-leakTest" style="height:500px; overflow-y:auto">
+                        <table class="table table-hover table-striped  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>{{msg.name}}</th>
+                                <th>OID</th>
+                                <th>{{msg.operate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat = "family in leakTest.nvts">
+                                <td id="family-name">{{family.name}}</td>
+                                <td id="family-oid">{{family.oid}}</td>
+                                <td><input type='checkbox' ng-checked="family.selected == 1"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="clickModalOk('editLeakTest',leakType.id)">{{msg.saveBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

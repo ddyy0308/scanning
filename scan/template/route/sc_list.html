@@ -1,0 +1,55 @@
+<section>
+    <div class="panel-info col-md-12 page-content">
+        <div class="panel-heading custom-panel-heading">
+            <ul class="nav  nav-pills" role="tablist">
+                <li class="active b-pr50">
+                    <a href="#">{{msg.scanConfig}}<span class="badge pull-right" title={{msg.certificateNum}}>{{scanConfigList.total}}</span></a>
+                </li>
+                <li>
+                    <a class="glyphicon glyphicon-plus" ng-click="createSCModal();" data-toggle="tooltip" title={{msg.newScanConfig}}></a>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-body b-p0">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th rowspan="2">{{msg.name}}</th>
+                    <th colspan="2">{{msg.leakType}}</th>
+                    <th colspan="2">{{msg.testCase}}</th>
+                    <th rowspan="2">{{msg.operate}}</th>
+                </tr>
+                <tr>
+                    <th>{{msg.totalize}}</th>
+                    <th>{{msg.trend}}</th>
+                    <th>{{msg.totalize}}</th>
+                    <th>{{msg.trend}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="config in scanConfigList.lists">
+                    <td>{{config.name}}<p ng-if="config.comment">({{config.comment}})</p></td>
+                    <td>{{config.family_count}}</td>
+                    <td><a class='glyphicon' ng-class="{true:'glyphicon-arrow-right', false:'glyphicon-arrow-up'}[config.family_growing == 0]"></a></td>
+                    <td>{{config.nvt_count}}</td>
+                    <td><a class='glyphicon' ng-class="{true:'glyphicon-arrow-right', false:'glyphicon-arrow-up'}[config.nvt_growing == 0]"></a></td>
+                    <td class="action">
+                        <div>
+                            <a href="#/scanStrategy/{{config.id}}" class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title={{msg.lookScanConfig}}></a>
+                            <a ng-if="config.writable == 1" class="glyphicon glyphicon-edit" data-toggle="tooltip" title={{msg.editScanConfig}} ng-click="editSCModal(config.id)"></a>
+                            <a ng-if="config.writable != 1" class="glyphicon glyphicon-edit custom-disabled"></a>
+                            <a ng-if="config.in_use == 0" class="glyphicon glyphicon-remove" data-toggle="tooltip" title={{msg.deleteScanConfig}} ng-click="deleteScanConfig(config.id)"></a>
+                            <a ng-if="config.in_use != 0" class="glyphicon glyphicon-remove custom-disabled"></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-include="'/template/pagination.html'"></div>
+    <div class="modal-wrapper">
+        <div ng-include="'/template/newScanConfigModal.html'"></div>
+        <div ng-include="'/template/editScanConfigModal.html'"></div>
+    </div>
+</section>

@@ -1,0 +1,346 @@
+/*  !
+ * 定义页面共用属性样式
+  */
+
+body {
+    background-color: #f5f5f5;
+    font-family: "微软雅黑", "Open Sans", sans-serif;
+}
+
+.page-content-wrapper {
+    margin: 15px 15px 0 15px;
+}
+
+/* pag bar */
+.page-bar {
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+
+.page-bar .page-breadcrumb {
+    display: inline-block;
+    float: left;
+    padding: 8px 8px 8px 0;
+    margin: 0;
+    list-style: none;
+}
+
+.page-bar  ul li i.fa.fa-angle-right {
+    margin-left: 8px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+
+.icon-screen {
+    width:20px;
+    height: 20px;
+    color: #1f7fd0;
+}
+
+/* page content 主体内容 */
+.page-content {
+    padding:0 !important;
+}
+
+/* panel heading */
+.custom-panel-heading {
+    color: #31708f;
+    background-color: #fff !important;
+    border-color: #fff !important;
+    padding: 10px 0px !important;
+}
+
+/* 自定义table A样式 */
+.custom-table-A thead{
+    background-color: rgba(0,0,0,0) !important;
+    border:0 !important;
+    color: #000 !important;
+}
+
+.custom-table-A tbody tr{
+   /* border-bottom: 1px dashed #AAA !important; */
+}
+
+/* 控制扫描配置所有页面table样式 */
+.table thead {
+    background-color: #5D7488;
+    border: 1px solid #D8D8D8;
+    color: #FFF;
+}
+
+.table thead tr th,
+.table tbody tr td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 12px !important;
+}
+
+/* table中操作按钮 */
+table .action div a {
+    padding-right: 20px;
+}
+
+/* pagination 翻页组件 */
+div#pagination {
+    position: relative;
+    right: 15px;
+    float: right;
+    top: -40px;
+}
+
+#custom-pagination {
+    position: relative;
+    left: 15px;
+    display: none;
+}
+
+#pagination-select-listNum {
+    position: relative;
+    width: 80px;
+    float: right;
+    top: -20px;
+    right: 25px;
+}
+
+#pagination-start-end {
+    position: relative;
+    float: right;
+    top: -13px;
+    right: 30px;
+}
+
+/* 禁止操作按钮 */
+.custom-disabled,
+.custom-disabled:link,
+.custom-disabled:visited,
+.custom-disabled:hover,
+.custom-disabled:active {
+    color:#CCC;
+}
+
+/* nav-pills badge */
+.list-group-item.active>.badge,
+.nav-pills>.active>a>.badge {
+    margin-left: 10px;
+}
+
+/* 扫描详情 */
+.device-img div img {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.device-img-top {
+    margin-bottom: 40px;
+}
+
+.radial-leak-num {
+    margin-top: -70px;
+    font-size: 26px;
+}
+
+.radial-leak-description {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#radial-leak-num-total{
+    margin-top: -80px !important;
+}
+
+/* 扫描动画 */
+#industry-device{
+    display: none;
+    width:200px;
+    height:200px;
+    margin-top: 20px;
+    margin-right: 20px;
+
+    -webkit-animation-duration: 3s;
+       -moz-animation-duration: 3s;
+            animation-duration: 3s;
+
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+            animation-iteration-count:infinite;
+}
+
+#mirror-device {
+    position: absolute;
+    z-index: 100;
+    margin-left: 100px;
+    margin-top: -120px;
+    width: 200px;
+    height: 200px;
+    display: none;
+
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+            animation-iteration-count:infinite;
+
+    -webkit-animation-duration: 5s;
+       -moz-animation-duration: 5s;
+            animation-duration: 5s;
+
+}
+div#table-roll {
+    height: 640px;
+    overflow-y: scroll;
+}
+#radial-scan-percent canvas {
+    margin-top: 20px;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count:infinite;
+
+    -webkit-animation-duration: 10s;
+    -moz-animation-duration: 10s;
+    animation-duration: 10s;
+}
+.device-img div img {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.device-img-top {
+    margin-bottom: 40px;
+}
+
+/* icon */
+.icon-tool {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -142px -121px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-globe-alt {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat 0 -121px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-certificate {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat 0 -422px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-target {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat 0 -48px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+ .icon-tongji {
+     width: 20px;
+     height: 20px;
+     background: url('/assets/img/statistics/top_icon.png') no-repeat -109px -232px;
+     display: block;
+     float: left;
+     padding-right: 30px;
+ }
+
+.icon-globe {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -35.5px -48px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-clock {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -71px -120px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-doc {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -5px -233px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-docs {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -5px -195px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-chelue {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -5px -387px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-diamond {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -36px -270px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-shuffle {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -110px -119px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-lock {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -35px -347px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-size-actual{
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -30px -84px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}
+
+.icon-cloud-download {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/statistics/top_icon.png') no-repeat -38px -234px;
+    display: block;
+    float: left;
+    padding-right: 30px;
+}

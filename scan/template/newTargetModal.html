@@ -1,0 +1,81 @@
+<div id="modal-new-target" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="target-form" class="form-horizontal container-fluid" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{msg.newTarget}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="col-md-5">{{msg.name}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]"  name="name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.comment}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="comment"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.host}}*</label>
+                        <div class="col-md-7 "><input class="form-control validate[required]" name="hosts"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.excludeHost}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="exclude_hosts"></div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.onlyReverseSearch}}</label>
+                        <div class="col-md-7">是&nbsp&nbsp<input  type="checkbox" name="reverse_lookup_only"></div>
+                    </div>
+                    <div class="form-group b-dpNone">
+                        <label class="col-md-5">{{msg.allReverseSearch}}</label>
+                        <div class="col-md-7">是&nbsp&nbsp<input  type="checkbox" name="reverse_lookup_unify"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.portList}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control"name="port_list">
+                                <option value="{{list.id}}" ng-repeat="list in modal.portLists" ng-selected="list == modal.portLists[0]">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.smbCertificate}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="smb_lsc_credential">
+                                <option value="" ng-selected="true">--</option>
+                                <option value="{{list.id}}" ng-repeat="list in modal.certificateLists">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.sshCertificate}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="ssh_lsc_credential">
+                                <option value="" ng-selected="true">--</option>
+                                <option value="{{list.id}}" ng-repeat="list in modal.certificateLists">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.aliveTest}}</label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="alive_tests">
+                                <option value="Scan Config Default">{{msg.defaultScanConfig}}</option>
+                                <option value="ICMP Ping">ICMP Ping</option>
+                                <option value="TCP-ACK Service Ping">TCP-ACK Service Ping</option>
+                                <option value="TCP-SYN Service Ping">TCP-SYN Service Ping</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="modal-target-extend">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="clickModalOk('new')">{{msg.confirmBtn}}</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div>
+
+</div><!-- /.modal-dialog -->

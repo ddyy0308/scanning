@@ -1,0 +1,48 @@
+<div id="modal-edit-dictStrategy" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="portlist-form" name="form" class="form-horizontal container-fluid" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" custom-modal-status="new">{{msg.editDict}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.name}}</label>
+                        <div class="col-md-7 "><input class="form-control" name="name" ng-model="formEditDictData.name" disabled></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.dictUsage}}-{{msg.system}}</label>
+                        <div class="col-md-7 ">
+                            <label>{{msg.username}}&nbsp</label>
+                            <input type="checkbox" name="user_system" ng-model="formEditDictData.user_system"
+                                    ng-true-value='1'  ng-false-value='0' >
+                            &nbsp&nbsp<label>{{msg.password}}&nbsp</label>
+                            <input type="checkbox" name="pass_system" ng-model="formEditDictData.pass_system"
+                                    ng-true-value='1'  ng-false-value='0' >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5">{{msg.dictUsage}}-{{msg.custom}}</label>
+                        <div class="col-md-7 ">
+                            <div>
+                                <label>{{msg.username}}&nbsp</label>
+                                <input type="checkbox" name="user_custom" ng-model="formEditDictData.user_custom"
+                                       ng-true-value='1'  ng-false-value='0' >
+                                <input type="file" name="user_custom_file" nv-file-select="" uploader="uploader" ng-disabled="formEditDictData.user_custom ==0">
+                            </div>
+                            <div><label>{{msg.password}}&nbsp</label>
+                                <input type="checkbox" name="pass_custom" ng-model="formEditDictData.pass_custom"
+                                       ng-true-value='1'  ng-false-value='0' >
+                                <input type="file" name="pass_custom_file"  nv-file-select="" uploader="uploader1" ng-disabled="formEditDictData.pass_custom ==0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="clickModalOk('edit',formEditDictData.id)">{{msg.saveBtn}}</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- .modal-dialog -->
+</div><!-- /.modal -->

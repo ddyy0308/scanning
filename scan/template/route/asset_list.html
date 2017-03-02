@@ -1,0 +1,36 @@
+<section>
+    <div class="panel-info col-md-12 page-content">
+        <div class="panel-heading custom-panel-heading">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="javascript:;">{{msg.host}}<span class="badge">{{assetList.total}}</span></a></li>
+            </ul>
+        </div>
+        <div class="panel-body b-p0">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr><th >IP</th><th class="b-bgRed">{{msg.highThreat}}</th><th class="b-bgYellow">{{msg.mediumThreat}}</th>
+                    <th class="b-bgBlue">{{msg.lowThreat}}</th><th class="b-bgGray">{{msg.record}}</th>
+                    <th >{{msg.os}}</th><th >{{msg.openPortNumber}}</th><th>{{msg.recentReportTime}}</th><th>{{msg.operate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="host in assetList.lists">
+                        <td><i class="fa fa-desktop fa-fw"></i><a href="#/host/{{host.ip}}">&nbsp{{host.ip}}</a></td>
+                        <td>{{host.reporthigh}}</td>
+                        <td>{{host.reportmedium}}</td>
+                        <td>{{host.reportlow}}</td>
+                        <td>{{host.reportrecord}}</td>
+                        <td><i class="fa" title={{host.os}}
+                               ng-class="{'fa-windows':host['ostype']=='windows','fa-linux':host['ostype']=='linux', 'fa-question-circle':host['ostype']=='unknown'}"></i>
+                        </td>
+                        <td>{{host.portcount}}</td>
+                        <td>{{host.lastreporttime}}</td>
+
+                        <td><a href="#/host/{{host.ip}}" data-toggle="tooltip" title="{{msg.lookAssetDetail}}" class="glyphicon glyphicon-eye-open"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-include="'/template/pagination.html'" ></div>
+</section>

@@ -1,0 +1,58 @@
+<section>
+    <div class="panel-info col-md-12 page-content">
+        <div class="panel-heading custom-panel-heading">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="javascript:void(0);">{{msg.hostDetail}}<span class="badge">{{detail.ip}}</span></a></li>
+            </ul>
+        </div>
+        <div class="panel-body b-p0">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{msg.hostDescription}}</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row b-mt10"><span class="col-md-2">{{msg.host}}</span><span class="col-md-10">{{detail.ip}}</span></div>
+                    <div class="row b-mt10"><span class="col-md-2">{{msg.macAddress}}</span><span class="col-md-10">{{detail.mac}}</span></div>
+                    <div class="row b-mt10"><span class="col-md-2">{{msg.os}}</span>
+                        <span class="col-md-10 fa " ng-class="{'fa-windows':detail['ostype']=='windows','fa-linux':detail['ostype']=='linux','fa-question-circle':detail['ostype']=='unknown'}">&nbsp&nbsp{{detail.os}}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{msg.openPort}}</strong>
+                </div>
+                <div class="panel-body open-port">
+                    <div class="row b-mt10">
+                        <span class="col-md-2">TCP</span><span class="col-md-10"><span class="badge b-mr10" ng-repeat="port in detail.tcp_ports">{{port}}</span></span>
+                    </div>
+                    <div class="row b-mt10">
+                        <span class="col-md-2">UDP</span><span class="col-md-10"><span class="badge b-mr10" ng-repeat="port in detail.udp_ports">{{port}}</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{msg.reportStatistics}}</strong>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div class="row b-mt10"><span class="col-md-2">{{msg.reportNumber}}</span><span class="col-md-10">{{detail.reportcount}}</span></div>
+                        <div class="row b-mt10"><span class="col-md-2">{{msg.recentReportTime}}</span><span class="col-md-10">{{detail.lastreporttime}}</span></div>
+                        <div class="row b-mt10">
+                            <span class="col-md-2">{{msg.leakThreatStatistics}}</span>
+                            <span class="col-md-4">
+                                <ul class="nav nav-pills">
+                                    <li class="b-bgRed b-plr20 b-mr10">{{msg.highThreat}}:{{detail.reporthigh}}</li>
+                                    <li class="b-bgYellow b-plr20 b-mr10">{{msg.mediumThreat}}:{{detail.reportmedium}}</li>
+                                    <li class="b-bgBlue b-plr20 b-mr10">{{msg.lowThreat}}:{{detail.reportlow}}</li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

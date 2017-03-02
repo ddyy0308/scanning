@@ -1,0 +1,539 @@
+<section>
+    <div ng-controller="modalCtrl">
+        <ul class="nav nav-tabs" id="myTab">
+            <li><a href="#tab-overview-task" data-toggle="tab">{{msg.taskInfo}}</a></li>
+            <li><a href="#tab-overview-host" data-toggle="tab">{{msg.hostList}}</a></li>
+            <li><a href="#tab-overview-leak" data-toggle="tab">{{msg.leakList}}</a></li>
+            <li><a href="#tab-overview-port" data-toggle="tab">{{msg.portServiceList}}</a></li>
+            <li><a href="#tab-overview-user" data-toggle="tab">{{msg.accountList}}</a></li>
+            <li><a href="#tab-overview-reference" data-toggle="tab">{{msg.referenceInfo}}</a></li>
+            <li class="pull-right"><div class="btn-group">
+                <a href="#tab-leakResult" class="btn btn-success" ng-click="backReportResult()"><i class="fa fa-reply fa-fw"></i>&nbsp{{msg.return}}</a>
+                <a href="javascript:void(0);" class="btn btn-success" ng-click="generateReportModal()"><i class="fa fa-file-pdf-o fa-fw"></i>&nbsp{{msg.generateReport}}</a>
+                <a href="javascript:void(0);" ng-if="gReportType!='overview-task'" class="btn btn-success" ng-click="editRFModal('overview');">
+                    <i class="fa fa-fw" ng-class="{false:'fa-check-square-o', true:'fa-square-o'}[gFilterParam == undefined]"></i>&nbsp{{msg.filter}}
+                </a>
+            </div></li>
+        </ul>
+        <div class="tab-content" >
+            <div class="tab-pane fade in" id="tab-overview-task" >
+                <div class="panel-group" id="accordion">
+                    <div class="panel-default col-md-12">
+                        <div class="panel-heading b-bb1">
+                            <h4 class="panel-title">
+                                <a class="" data-toggle="collapse" data-parent="#accordion" href="javascript:;" ng-init="firstArrows=false" ng-click="collapseMenu('#collapseOne');firstArrows=!firstArrows;">
+                                    <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[firstArrows]"></i>{{msg.taskInfo}}</a>
+                            </h4>
+                        </div><!--panel-heading -->
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body container-fluid">
+                                <div class="row b-bgThinGray b-ptb5">
+                                    <span class="col-md-4">{{msg.taskName}}</span>
+                                    <span class="col-md-8">{{taskInfo.name}}&nbsp<span ng-if="taskInfo.comment">({{taskInfo.comment}})</span></span>
+                                </div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.taskStatus}}</span><span class="col-md-8">{{msg.status[taskInfo.status]}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">{{msg.scanStrategy}}</span><span class="col-md-8">{{taskInfo.config_name}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.scanTarget}}</span><span class="col-md-8">{{taskInfo.target_name}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">{{msg.scanOrder}}</span><span class="col-md-8">{{msg.hostOrder[taskInfo.hosts_ordering]}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.startTime}}</span><span class="col-md-8">{{taskInfo.scan_start}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">{{msg.endTime}}</span><span class="col-md-8">{{taskInfo.scan_end}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.taskConsumeTime}}</span><span class="col-md-8">{{taskInfo.scan_time | convertTime}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">{{msg.executeTestCaseNumber}}</span><span class="col-md-8">{{taskInfo.max_checks}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.scanHostNumber}}</span><span class="col-md-8">{{taskInfo.max_hosts}}</span></div>
+                            </div>
+                        </div>
+                    </div><!--panel-info-->
+                    <div class="panel-default col-md-12">
+                        <div class="panel-heading b-bb1">
+                            <h4 class="panel-title">
+                                <a class="" data-toggle="collapse" data-parent="#accordion" href="javascript:;" ng-init="twoArrows=true" ng-click="collapseMenu('#collapseTwo');twoArrows = !twoArrows;">
+                                    <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[twoArrows]"></i>{{msg.targetInfo}}</a>
+                            </h4>
+                        </div><!--panel-heading -->
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body container-fluid">
+                                <div class="row b-bgThinGray b-ptb5">
+                                    <span class="col-md-4">{{msg.targetName}}</span>
+                                    <span class="col-md-8">{{targetInfo.name}}&nbsp<span ng-if="targetInfo.comment">({{targetInfo.comment}})</span></span>
+                                </div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.scanTarget}}</span><span class="col-md-8">{{targetInfo.target_name}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">{{msg.excludeHost}}</span><span class="col-md-8">{{targetInfo.exclude_hosts}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">{{msg.portList}}</span><span class="col-md-8">{{targetInfo.port_list}}</span></div>
+                                <div class="row b-bgThinGray b-ptb5"><span class="col-md-4">smb{{msg.certificate}}</span><span class="col-md-8">{{targetInfo.smb_lsc_credential_name}}</span></div>
+                                <div class="row b-ptb5"><span class="col-md-4">ssh{{msg.certificate}}</span><span class="col-md-8">{{targetInfo.ssh_lsc_credential_name}}</span></div>
+                            </div>
+                        </div>
+                    </div><!--panel-info-->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-overview-host">
+                <div role="list" class="panel-info col-md-12 page-content" ng-show="!bSwitchHost">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="active b-pr50">
+                                <a>{{msg.hostList}}<span class="badge pull-right">{{hostOverviewList.total}}</span></a>
+                            </li>
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchHost = !bSwitchHost"><i class="fa fa-area-chart fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0" >
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.number}}</th>
+                                <th>{{msg.host}}</th>
+                                <th>{{msg.safeLevel}}</th>
+                                <th>{{msg.leakTotal}}</th>
+                                <th>{{msg.highLeakNumber}}</th>
+                                <th>{{msg.mediumLeakNumber}}</th>
+                                <th>{{msg.lowLeakNumber}}</th>
+                                <th>{{msg.recordNumber}}</th>
+                                <th>{{msg.portServiceNumber}}</th>
+                                <th>{{msg.userNumber}}</th>
+                                <th>{{msg.riskScore}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="host in hostOverviewList.lists">
+                                <td><my-number index={{$index}}></my-number></td>
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{host.ip}}</td>
+                                <td>{{msg.safeArray[host.threat]}}</td>
+                                <td>{{host.result_count}}</td>
+                                <td>{{host.high}}</td>
+                                <td>{{host.medium}}</td>
+                                <td>{{host.low}}</td>
+                                <td>{{host.record}}</td>
+                                <td>{{host.port_count}}</td>
+                                <td>{{host.user_count}}</td>
+                                <td>{{host.severity}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+                <div role="chart" class="panel-info col-md-12 page-content" ng-show="bSwitchHost">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchHost = !bSwitchHost"><i class="fa fa-list-ol fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <div id="host-chart" class="center-block" style="height: 600px; width:1000px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-overview-leak">
+                <div role="list" class="panel-info col-md-12 page-content" ng-show="!bSwitchLeak">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="active b-pr50">
+                                <a>{{msg.leakList}}<span class="badge pull-right">{{leakOverviewList.total}}</span></a>
+                            </li>
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchLeak = !bSwitchLeak"><i class="fa fa-area-chart fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped b-table-fixed">
+                            <thead>
+                            <tr>
+                                <th class="b-w80-px">{{msg.number}}</th>
+                                <th>{{msg.leakName}}</th>
+                                <th class="b-w100-px">{{msg.threatLevel}}</th>
+                                <th class="b-w120-px">{{msg.leakType}}</th>
+                                <th class="b-w100-px">{{msg.hostTotal}}</th>
+                                <th class="b-w160-px">CVE{{msg.number}}</th>
+                                <th class="b-w120-px">{{msg.existHost}}</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="leak in leakOverviewList.lists">
+                                <td><my-number index={{$index}}></my-number></td>
+                                <td class="b-taL b-text-cut" data-toggle="tooltip-" title={{leak.name}}>{{leak.name}}</td>
+                                <td>{{msg.threatArray[leak.threat]}}</td>
+                                <td>{{leak.type}}</td>
+                                <td>{{leak.host_count}}</td>
+                                <td class="b-taL b-text-cut" data-toggle="tooltip-" title={{leak.cve}}>{{leak.cve}}</td>
+                                <td class="b-text-cut" data-toggle="tooltip-" title={{leak.exist_hosts}}>{{leak.exist_hosts}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div role="chart" class="panel-info col-md-12 page-content" ng-show="bSwitchLeak">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchLeak = !bSwitchLeak"><i class="fa fa-list-ol fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <div rolw="panel-group" class="panel-group" id="accordion-leak">
+                            <div class="panel-default col-md-12">
+                                <div class="panel-heading b-bb1">
+                                    <h4 class="panel-title">
+                                        <a class="" data-toggle="collapse" data-parent="#accordion-leak" href="javascript:;" ng-init="leakArrows1=false" ng-click="collapseMenu('#collapse-leak-1');leakArrows1=!leakArrows1;">
+                                            <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[leakArrows1]"></i>Top10 {{msg.threatLeak}}</a>
+                                    </h4>
+                                </div><!--panel-heading -->
+                                <div id="collapse-leak-1" class="panel-collapse collapse in">
+                                    <div class="panel-body container-fluid b-p0">
+                                        <table class="table b-table-fixed custom-table-A">
+                                            <thead>
+                                            <tr>
+                                                <th class="b-w80-px">{{msg.number}}</th>
+                                                <th>{{msg.leakName}}</th>
+                                                <th class="b-w100-px">{{msg.threatLevel}}</th>
+                                                <th class="b-w120-px">{{msg.leakType}}</th>
+                                                <th class="b-w100-px">{{msg.hostTotal}}</th>
+                                                <th class="b-w160-px">CVE{{msg.number}}</th>
+                                                <th class="b-w120-px">{{msg.existHost}}</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat ="leak in leakCollapse.leakTop10">
+                                                <td>{{$index+1}}</td>
+                                                <td class=" b-text-cut" data-toggle="tooltip-" title={{leak.name}}>{{leak.name}}</td>
+                                                <td>{{msg.threatArray[leak.threat]}}</td>
+                                                <td>{{leak.type}}</td>
+                                                <td>{{leak.host_count}}</td>
+                                                <td class="b-text-cut" data-toggle="tooltip-" title={{leak.cve}}>{{leak.cve}}</td>
+                                                <td class="b-text-cut" data-toggle="tooltip-" title={{leak.exist_hosts}}>{{leak.exist_hosts}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- Top10-->
+                            <div class="panel-default col-md-12">
+                                <div class="panel-heading b-bb1">
+                                    <h4 class="panel-title">
+                                        <a class="" data-toggle="collapse" data-parent="#accordion-leak" href="javascript:;" ng-init="leakArrows2=true" ng-click="collapseMenu('#collapse-leak-2');leakArrows2=!leakArrows2;">
+                                            <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[leakArrows2]"></i>{{msg.leakRD}}</a>
+                                    </h4>
+                                </div><!--panel-heading -->
+                                <div id="collapse-leak-2" class="panel-collapse collapse">
+                                    <div class="panel-body container-fluid b-p0">
+                                        <div class="col-md-5 b-p0">
+                                            <table class="table custom-table-A">
+                                                <thead>
+                                                    <tr>
+                                                        <th>{{msg.number}}</th>
+                                                        <th>{{msg.threatLevel}}</th>
+                                                        <th>{{msg.leakNumber}}</th>
+                                                        <th>{{msg.percent}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat ="leak in leakCollapse.leakRiskDistribute">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>{{msg.threatArray[leak.threat]}}</td>
+                                                        <td>{{leak.result_count}}</td>
+                                                        <td>{{leak.percent}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-1 b-p0">
+                                            <div id="leakRD-pie" class="center-block" style="height: 400px; width:670px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- leakRD-->
+                            <div class="panel-default col-md-12">
+                                <div class="panel-heading b-bb1">
+                                    <h4 class="panel-title">
+                                        <a class="" data-toggle="collapse" data-parent="#accordion-leak" href="javascript:;" ng-init="leakArrows3=true" ng-click="collapseMenu('#collapse-leak-3');leakArrows3=!leakArrows3;">
+                                            <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[leakArrows3]"></i>{{msg.highLeakHD}}</a>
+                                    </h4>
+                                </div><!--panel-heading -->
+                                <div id="collapse-leak-3" class="panel-collapse collapse">
+                                    <div class="panel-body container-fluid b-p0">
+                                        <div class="col-md-5 b-p0">
+                                            <table class="table custom-table-A">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{msg.number}}</th>
+                                                    <th>{{msg.host}}</th>
+                                                    <th>{{msg.highRiskLeakNumber}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat ="leak in leakCollapse.leakHostDistribute">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{leak.ip}}</td>
+                                                    <td>{{leak.high_count}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-7 b-p0">
+                                            <div id="leakHD-bar" class="center-block" style="height: 400px; width:670px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- leakHD-->
+                            <div class="panel-default col-md-12">
+                                <div class="panel-heading b-bb1">
+                                    <h4 class="panel-title">
+                                        <a class="" data-toggle="collapse" data-parent="#accordion-leak" href="javascript:;" ng-init="leakArrows4=true" ng-click="collapseMenu('#collapse-leak-4');leakArrows4=!leakArrows4;">
+                                            <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[leakArrows4]"></i>{{msg.osHD}}</a>
+                                    </h4>
+                                </div><!--panel-heading -->
+                                <div id="collapse-leak-4" class="panel-collapse collapse">
+                                    <div class="panel-body container-fluid b-p0">
+                                        <div class="col-md-5 b-p0">
+                                            <table class="table custom-table-A">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{msg.number}}</th>
+                                                    <th>{{msg.os}}</th>
+                                                    <th>{{msg.hostTotal}}</th>
+                                                    <th>{{msg.percent}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat ="leak in leakCollapse.osHostDistribute">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{leak.os}}</td>
+                                                    <td>{{leak.host_count}}</td>
+                                                    <td>{{leak.percent}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-1 b-p0">
+                                            <div id="osHD-pie" class="center-block" style="height: 400px; width:670px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- osHD-->
+                            <div class="panel-default col-md-12">
+                                <div class="panel-heading b-bb1">
+                                    <h4 class="panel-title">
+                                        <a class="" data-toggle="collapse" data-parent="#accordion-leak" href="javascript:;" ng-init="leakArrows5=true" ng-click="collapseMenu('#collapse-leak-5');leakArrows5=!leakArrows5;">
+                                            <i class="fa fa-fw" ng-class="{true:'fa-angle-double-down', false:'fa-angle-double-up'}[leakArrows5]"></i>{{msg.osLD}}</a>
+                                    </h4>
+                                </div><!--panel-heading -->
+                                <div id="collapse-leak-5" class="panel-collapse collapse">
+                                    <div class="panel-body container-fluid b-p0">
+                                        <div class="col-md-5 b-p0">
+                                            <table class="table custom-table-A">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{msg.number}}</th>
+                                                    <th>{{msg.os}}</th>
+                                                    <th>{{msg.leakNumber}}</th>
+                                                    <th>{{msg.percent}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat ="leak in leakCollapse.osLeakDistribute">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{leak.os}}</td>
+                                                    <td>{{leak.result_count}}</td>
+                                                    <td>{{leak.percent}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-7 b-p0">
+                                            <div id="osLD-bar" class="center-block" style="height: 400px; width:670px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- osLD-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-overview-port">
+                <div role="list" class="panel-info col-md-12 page-content" ng-show="!bSwitchPort">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="active b-pr50">
+                                <a>{{msg.portServiceList}}<span class="badge pull-right">{{portOverviewList.total}}</span></a>
+                            </li>
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchPort = !bSwitchPort"><i class="fa fa-list-ol fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.number}}</th>
+                                <th>{{msg.port}}</th>
+                                <th>{{msg.protocol}}</th>
+                                <th>{{msg.hostTotal}}</th>
+                                <th>{{msg.serviceName}}</th>
+                                <th>{{msg.description}}</th>
+                                <th>{{msg.existHost}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="leak in portOverviewList.lists">
+                                <td><my-number index={{$index}}></my-number></td>
+                                <td>{{leak.port}}</td>
+                                <td>{{leak.type}}</td>
+                                <td>{{leak.host_count}}</td>
+                                <td>{{leak.name}}</td>
+                                <td>{{leak.description}}</td>
+                                <td>{{leak.exist_hosts}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+                <div role="chart" class="panel-info col-md-12 page-content" ng-show="bSwitchPort">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="pull-right">
+                                <button class="btn btn-success" ng-click="bSwitchPort = !bSwitchPort"><i class="fa fa-list-ol fa-fw"></i>&nbsp{{msg.switch}}</button>
+                            </li>
+                        </ul>
+
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <div id="port-chart" class="center-block" style="height: 600px; width:1000px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-overview-user">
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="active b-pr50">
+                                <a>{{msg.accountList}}<span class="badge pull-right">{{userOverviewList.total}}</span></a>
+                            </li>
+                        </ul>
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{msg.number}}</th>
+                                <th>{{msg.host}}</th>
+                                <th>{{msg.guessType}}</th>
+                                <th>{{msg.user}}</th>
+                                <th>{{msg.password}}</th>
+                                <th>{{msg.description}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat ="leak in userOverviewList.lists">
+                                <td><my-number index={{$index}}></my-number></td>
+                                <td><i class="fa fa-desktop fa-fw"></i>&nbsp{{leak.ip}}</td>
+                                <td>{{leak.type}}</td>
+                                <td>{{leak.user}}</td>
+                                <td>{{leak.pass}}</td>
+                                <td>{{leak.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!--panel-info-->
+            </div>
+            <div class="tab-pane fade" id="tab-overview-reference">
+                <div class="panel-info col-md-12 page-content">
+                    <div class="panel-heading custom-panel-heading">
+                    </div><!--panel-heading -->
+                    <div class="panel-body b-p0">
+                        <section>
+                            <h4 class="b-fwBold"><i class="fa fa-fw fa-lg fa-bug"></i>&nbsp漏洞风险等级评定标准</h4>
+                            <h5><p>本系统采用通用弱点评价体系（CVSS）的第二版（CVSS v2）对漏洞进行评级（基本度量），具体评定可参见下表所示:</p></h5>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>危险程度</th>
+                                    <th>危险值区域</th>
+                                    <th>危险程度说明</th>
+                                    <th>建议</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat ="leak in referenceList.lists.leak" ng-class="leak.class">
+                                    <td>{{leak.level}}</td>
+                                    <td>{{leak.area}}</td>
+                                    <td>{{leak.description}}</td>
+                                    <td>{{leak.suggest}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h5><p>具体的分值评定如下表所示:</p></h5>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>分值</th>
+                                    <th>评估系统</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat ="score in referenceList.lists.scores" class="success">
+                                    <td class="col-md-4"><my-number index={{$index}}></my-number></td>
+                                    <td>{{score}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </section>
+                        <section>
+                            <h4 class="b-fwBold"><i class="fa fa-fw fa-lg fa-laptop"></i>&nbsp主机风险等级评定标准</h4>
+                            <h5><p>在漏洞风险等级评定的基础上，根据“风险评估模型”计算出的主机风险等级评定标准如下表所示:</p></h5>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>主机风险等级</th>
+                                    <th>主机风险值区域</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat ="host in referenceList.lists.host" ng-class="host.class">
+                                    <td>{{host.level}}</td>
+                                    <td>{{host.area}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </section>
+                        <section>
+                            <h4 class="b-fwBold"><i class="fa fa-fw fa-lg fa-globe"></i>&nbsp网络风险等级评定标准</h4>
+                            <h5><p>在主机风险等级评定的基础上，根据“风险评估模型”计算出的网络风险等级评定标准如下表所示:</p></h5>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>网络风险等级</th>
+                                    <th>网络风险值区域</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat ="network in referenceList.lists.network" ng-class="network.class">
+                                    <td>{{network.level}}</td>
+                                    <td>{{network.area}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </section>
+                    </div>
+                </div><!--panel-info-->
+            </div>
+            <div ng-include="'/template/pagination.html'" ng-show="!bSwitchHost && !bSwitchPort && !bSwitchLeak"></div>
+            <div class="modal-wrapper">
+                <div ng-include="'/template/reportFilterModal.html'"></div>
+                <div ng-include="'/template/generateReportModal.html'"></div>
+            </div>
+        </div>
+    </div>
+</section>

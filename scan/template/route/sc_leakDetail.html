@@ -1,0 +1,42 @@
+<section>
+    <div class="panel-info col-md-12 page-content b-mt20">
+        <div class="panel-heading custom-panel-heading b-dpNone">
+            <ul class="nav nav-pills" role="tablist">
+                <li id="summary" class="active">
+                    <a href="#">{{msg.scanConfigLeakDetail}}<span class="badge pull-right">{{leakDetail.value.length}}</span></a>
+                </li>
+            </ul>
+        </div><!--panel-heading -->
+        <div class="panel-body b-p0">
+            <div class="container-fluid">
+                <div class="row">
+                    <table class="col-md-8">
+                        <tbody class="row">
+                        <tr ng-if="false"><th class="col-md-2">{{msg.config}}:</th><th class="col-md-10">{{configDetail.name}}</th></tr>
+                        <tr><th class="col-md-2">{{msg.leakType}}:</th><th class="col-md-10">{{leakDetail.familyName}}</th></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h3><strong>{{msg.testCase}}</strong></h3>
+            <table class="table table-hover table-striped  table-bordered">
+                <thead>
+                <tr>
+                    <th>{{msg.name}}</th>
+                    <th>OID</th>
+                    <th>{{msg.operate}}</th>
+                </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                <tr ng-repeat="family in leakDetail.value | orderBy:'name'">
+                    <td>{{family.name}}</td>
+                    <td>{{family.oid}}</td>
+                    <td><a href="#/testCase/{{family.oid}}/{{leakDetail.familyName}}" class="glyphicon glyphicon-search" title="查看扫描配置漏洞详情"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div><!--panel-body -->
+    </div><!--panel-info-->
+</section>
